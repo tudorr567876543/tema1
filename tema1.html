@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        #canvas {
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+    <p id="a">Alpha = </p>
+    <p id="b">Beta = </p>
+    <p id="c">Gamma = </p>
+    <button onclick="updateCanvas()">Actualizare</button>
+    <canvas id="canvas" height="400" width="400"></canvas>
+
+    <script>
+        window.addEventListener("deviceorientation", on_device_orientation);
+
+        function on_device_orientation(evt) {
+            var alpha = evt.alpha;
+            var beta = evt.beta;
+            var gamma = evt.gamma;
+            document.getElementById("a").innerHTML = "Alpha = " + alpha;
+            document.getElementById("b").innerHTML = "Beta = " + beta;
+            document.getElementById("c").innerHTML = "Gamma = " + gamma;
+
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+            var centru = {
+                x: canvas.width / 2,
+                y: canvas.height / 2
+            };
+
+            var latura_patrat = 50;
+            var lungime = 180 + gamma;
+
+            context.clearRect(0, 0, canvas.width, canvas.height);
+            context.fillStyle = "#6A0888";
+            context.fillRect(180, 150, lungime, 50);
+        }
+
+        function updateCanvas() {
+            var canvas = document.getElementById("canvas");
+            var context = canvas.getContext("2d");
+            context.clearRect(0, 0, canvas.width, canvas.height);
+        }
+    </script>
+</body>
+</html>
